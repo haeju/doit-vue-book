@@ -1,0 +1,28 @@
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Vue Resource Sample</title>
+    <script src="../../js/vendor/vue.js"></script>
+    <script src="../../js/vendor/vue-resource.js"></script>
+
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="getData">프레임워크 목록 가져오기</button>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        methods: {
+          getData: function() {
+            this.$http.get(`https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json`)
+                .then(function(response) {
+                  console.log(response);
+                  console.log(JSON.parse(response.data));
+                });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

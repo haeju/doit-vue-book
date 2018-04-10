@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Event Bus Sample</title>
+  <script src="../../js/vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <child-component></child-component>
+</div>
+
+
+
+<script>
+  <!-- 1. 이벤트 버스 생성 -->
+  var eventBus = new Vue();
+  Vue.component('child-component',{
+
+    // 2.  template 메소드 추가
+    template:'<div>하위 컴포넌트 영역입니다.<button v-on:click="showLog">show</button></div>',
+
+    // 3. triggerEventBus 발생 로직 추가
+    methods:{
+      showLog:function(){
+        eventBus.$emit('triggerEventBus',100)
+      }
+    }
+  });
+
+  var app= new Vue({
+    el:'#app',
+    created:function() {
+      eventBus.$on('triggerEventBus', function(vaule){
+          console.log("이벤트 전달 받은 값 : "+vaule);
+      });
+    }
+  });
+
+ //  show 버튼을 클릭하면 showLog()가 실행되었을때 eventBus의 이벤트가 발생
+ // 이벤트 버스 활용하면 props 속성을 이용하지 않고도 원하는 컴포넌트간에 직접적으로 데이타를 전달 할수 있어 편리하다.
+ // 하지만 컴포넌트가 많아지면 이벤트관리가 어려워지고 문제가 발생/
+  // 이 때문에 Vuex라는 상태 관리 도구가 필요함.
+</script>
+</body>
+</html>

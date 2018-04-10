@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Vue Template - Watch</title>
+    <script src="../../js/vendor/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model="message">
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue.js!'
+        },
+        watch:{
+          message:function(data){
+            console.log("value changed:", data);
+          }
+        }
+
+      });
+    </script>
+  </body>
+</html>

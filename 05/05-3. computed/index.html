@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Vue Template - Javascript Expression</title>
+    <script src="../../js/vendor/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      asdf
+      <!-- 1. -->
+      <!--{{ var a = 10; }} &lt;!&ndash; X, 선언문은 사용 불가능 &ndash;&gt;-->
+      <!--{{ if (true) {return 100} }} &lt;!&ndash; X, 분기 구문은 사용 불가능 &ndash;&gt;-->
+      {{ true ? 100 : 0 }} <!-- O, 삼항 연산자로 표현 가능 -->
+
+      <!-- 2. -->
+      <!--{{ message.split('').reverse().join('') }} &lt;!&ndash; X, 복잡한 연산은 인스턴스 안에서 수행 &ndash;&gt;-->
+      {{reverseMessage}}
+    </div>
+
+
+    <script>
+      new Vue({
+        el:'#app',
+        data:{
+          message:'Hello Vue.js!'
+        },
+        computed:{
+          reverseMessage:function(){
+            return this.message.split('').reverse().join();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
